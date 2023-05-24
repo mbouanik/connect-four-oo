@@ -5,10 +5,12 @@
  * this.board fills (tie)
  */
 class Game {
-  constructor(height, width){
+  constructor(height, width, players){
+    console.log(players[0])
     this.height = height
     this.width = width
-    this.currPlayer = 1
+    this.players = players
+    this.currPlayer = players[0].name
     this.board = []
     this.makeBoard()
     this.makeHtmlBoard()
@@ -61,6 +63,7 @@ class Game {
     }
   
     // place piece in this.board and add to HTML table
+    // console.log(this.currPlayer)
     this.board[y][x] = this.currPlayer;
     this.placeInTable(y, x);
     
@@ -75,12 +78,14 @@ class Game {
     }
       
     // switch players
-    this.currPlayer = this.currPlayer === 1 ? 2 : 1;
+    console.log(this.currPlayer)
+    this.currPlayer = this.players.filter((player) => player.name != this.currPlayer)[0].name;
+
   }
 
   findSpotForCol(x) {
     for (let y = this.height - 1; y >= 0; y--) {
-      if (!this.board[y][x]) {
+      if (!this.board[y][x] && !this.checkForWin()) {
         return y;
       }
     }
@@ -90,7 +95,7 @@ class Game {
   placeInTable(y, x) {
     const piece = document.createElement('div');
     piece.classList.add('piece');
-    piece.classList.add(`p${this.currPlayer}`);
+    piece.style.backgroundColor = this.currPlayer;
     piece.style.top = -50 * (y + 2);
   
     const spot = document.getElementById(`${y}-${x}`);
@@ -136,11 +141,23 @@ class Game {
   
 }
 
+class Player {
+  constructor(name){
+    this.name = name
+  }
+}
+
 function newGame(){
-  const btn = document.querySelector("#new-game")
-  btn.addEventListener('click', ()=>{
+  const form = document.querySelector("#new-game")
+  form.addEventListener('submit', (evt)=>{
+    evt.preventDefault()
     document.getElementById('board').replaceChildren()
-    new Game(6,7)
+    const p1 = new Player(form.elements[0].value)
+    const p2 = new Player(form.elements[1].value)
+    new Game(6,7,[p1,p2])
+   
   })
+  
 }
 newGame()
+// console.log(players)
