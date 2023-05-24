@@ -143,7 +143,18 @@ class Game {
 
 class Player {
   constructor(name){
+    if (!this.isColor(name)){
+      alert(`Unknown Color Name ${name}`)
+      throw Error (`Unknown Color Name :${name}`)
+      
+    }
     this.name = name
+  }
+
+  isColor(strColor){
+    const s = new Option().style;
+    s.color = strColor;
+    return s.color == strColor;
   }
 }
 
