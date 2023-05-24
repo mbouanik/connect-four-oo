@@ -10,7 +10,7 @@ class Game {
     this.height = height
     this.width = width
     this.players = players
-    this.currPlayer = players[0].name
+    this.currPlayer = players[0]
     this.board = []
     this.makeBoard()
     this.makeHtmlBoard()
@@ -64,12 +64,12 @@ class Game {
   
     // place piece in this.board and add to HTML table
     // console.log(this.currPlayer)
-    this.board[y][x] = this.currPlayer;
+    this.board[y][x] = this.currPlayer.name;
     this.placeInTable(y, x);
     
     // check for win
     if (this.checkForWin()) {
-      return this.endGame(`Player ${this.currPlayer} won!`);
+      return this.endGame(`Player ${this.currPlayer.name} won!`);
     }
     
     // check for tie
@@ -79,8 +79,8 @@ class Game {
       
     // switch players
     console.log(this.currPlayer)
-    this.currPlayer = this.players.filter((player) => player.name != this.currPlayer)[0].name;
-
+    this.currPlayer = this.players.filter(player => player.name != this.currPlayer.name)[0];
+    
   }
 
   findSpotForCol(x) {
@@ -95,7 +95,7 @@ class Game {
   placeInTable(y, x) {
     const piece = document.createElement('div');
     piece.classList.add('piece');
-    piece.style.backgroundColor = this.currPlayer;
+    piece.style.backgroundColor = this.currPlayer.name;
     piece.style.top = -50 * (y + 2);
   
     const spot = document.getElementById(`${y}-${x}`);
@@ -118,7 +118,7 @@ class Game {
           y < this.height &&
           x >= 0 &&
           x < this.width &&
-          this.board[y][x] === this.currPlayer
+          this.board[y][x] === this.currPlayer.name
       );
     }
   
