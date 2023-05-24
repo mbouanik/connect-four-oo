@@ -133,46 +133,14 @@ class Game {
       }
     }
   }
-
+  
 }
 
-
-// const WIDTH = 7;
-// const HEIGHT = 6;
-
-// let this.currPlayer = 1; // active player: 1 or 2
-// let this.board = []; // array of rows, each row is array of cells  (this.board[y][x])
-
-/** makethis.Board: create in-JS this.board structure:
- *   this.board = array of rows, each row is array of cells  (this.board[y][x])
- */
-
-
-
-/** makeHtmlthis.Board: make HTML table and row of column tops. */
-
-
-/** findSpotForCol: given column x, return top empty y (null if filled) */
-
-
-
-/** placeInTable: update DOM to place piece into HTML table of this.board */
-
-
-
-/** endGame: announce game end */
-
-
-
-/** handleClick: handle click of column top to play piece */
-
-
-
-/** checkForWin: check this.board cell-by-cell for "does a win start here?" */
-
-
-
-// makethis.Board();
-// makeHtmlthis.Board();
-const game = new Game(6,7)
-
+function newGame(){
+  const btn = document.querySelector("#new-game")
+  btn.addEventListener('click', ()=>{
+    document.getElementById('board').replaceChildren()
+    new Game(6,7)
+  })
+}
+newGame()
