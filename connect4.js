@@ -158,7 +158,7 @@ class Player {
 
 function newGame(){
   const form = document.querySelector("#new-game")
-  form.addEventListener('submit', (evt)=>{
+  form.addEventListener('submit', () => {
     evt.preventDefault()
     document.getElementById('board').replaceChildren()
     const p1 = new Player(form.elements[0].value)
@@ -169,4 +169,3 @@ function newGame(){
   
 }
 newGame()
-// console.log(players)
