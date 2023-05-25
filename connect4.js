@@ -150,9 +150,9 @@ class Player {
   }
 
   isColor(strColor){
-    const s = new Option().style;
-    s.color = strColor;
-    return s.color == strColor;
+    const option = new Option().style;
+    option.color = strColor;
+    return option.color == strColor;
   }
 }
 
