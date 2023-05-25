@@ -79,7 +79,7 @@ class Game {
       
     // switch players
     console.log(this.currPlayer)
-    this.currPlayer = this.players.filter(player => player.name != this.currPlayer.name)[0];
+    this.currPlayer = this.currPlayer === this.players[0] ? this.players[1] : this.players[0];
     
   }
 
