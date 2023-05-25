@@ -6,7 +6,6 @@
  */
 class Game {
   constructor(height, width, players){
-    console.log(players[0])
     this.height = height
     this.width = width
     this.players = players
@@ -78,7 +77,6 @@ class Game {
     }
       
     // switch players
-    console.log(this.currPlayer)
     this.currPlayer = this.currPlayer === this.players[0] ? this.players[1] : this.players[0];
     
   }
@@ -107,12 +105,12 @@ class Game {
   }
 
   checkForWin() {
-    function _win(cells) {
+    const _win = (cells) =>
       // Check four cells to see if they're all color of current player
       //  - cells: list of four (y, x) cells
       //  - returns true if all are legal coordinates & all match this.currPlayer
   
-      return cells.every(
+      cells.every(
         ([y, x]) =>
           y >= 0 &&
           y < this.height &&
@@ -120,7 +118,7 @@ class Game {
           x < this.width &&
           this.board[y][x] === this.currPlayer.name
       );
-    }
+
   
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.width; x++) {
@@ -132,7 +130,7 @@ class Game {
         const diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
   
         // find winner (only checking each win-possibility as needed)
-        if (_win.call(this, horiz) || _win.call(this, vert) || _win.call(this, diagDR) || _win.call(this, diagDL)) {
+        if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
           return true;
         }
       }
